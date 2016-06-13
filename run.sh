@@ -107,6 +107,7 @@ RUN cd /root/astropy && python setup.py install
 ### END ASTROPY BUILD
 EOT
   ;;
+  esac
 done
 
 ### INSERT CUSTOM DOCKER BUILD COMMANDS
