@@ -35,11 +35,11 @@ EOT
 ##### PARSE APPS REQUESTED AND ADD TO DOCKERFILE
 for appid in `jq -r '.apps[] | .["appid"]' config.json`
 do
-  case '$appid' in
+  case $appid in
     iraf)
       cat <<EOT >> Dockerfile
 ### IRAF BUILD
-RUN apt-get install --no-install-recommends --fix-missing -y wget csh
+RUN apt-get update && apt-get install --no-install-recommends --fix-missing -y wget csh
 #setup directories for iraf
 RUN mkdir /iraf
 RUN mkdir /iraf/iraf
@@ -66,21 +66,21 @@ EOT
   ds9)
     cat <<EOT >> Dockerfile
 ### DS9 BUILD
-RUN apt-get install -y saods9
+RUN apt-get update && apt-get install -y saods9
 ### END DS9 BUILD
 EOT
   ;;
   sextractor)
     cat << EOT >> Dockerfile
 ### SEXTRACTOR BUILD
-RUN apt-get install -y sextractor
+RUN apt-get update && apt-get install -y sextractor
 ### END SEXTRACTOR BUILD
 EOT
   ;;
   swarp)
     cat << EOT >> Dockerfile
 ### SWARP BUILD
-RUN apt-get install -y swarp
+RUN apt-get update && apt-get install -y swarp
 ### END SWARP BUILD
 EOT
   ;;
