@@ -125,6 +125,6 @@ docker build -t stardock-$UUID .
 
 cat << EOT > products.json
 [{
-        "imageid: "stardock-$UUID"
+        "imageid": "stardock-$UUID"
 }]
 EOT
