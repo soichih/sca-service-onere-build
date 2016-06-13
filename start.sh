@@ -33,7 +33,7 @@ EOT
 ####
 
 ##### PARSE APPS REQUESTED AND ADD TO DOCKERFILE
-for appid in `jq -r '.apps[] | .["appid"]'
+for appid in `jq -r '.apps[] | .["appid"]' config.json`
 do
   case '$appid' in
     iraf)
