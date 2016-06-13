@@ -121,3 +121,9 @@ EOT
 UUID=$(cat /proc/sys/kernel/random/uuid)
 
 docker build -t stardock-$UUID .
+
+cat << EOT > products.json
+[{
+        "imageid: "stardock-$UUID"
+}]
+EOT
