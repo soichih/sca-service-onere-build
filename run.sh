@@ -119,7 +119,7 @@ done
 ### STARDOCK FOOTER
 
 ### NEED TO SET USER PW
-pw=`$SCA_SERVICE_DIR/jq -r .[1].pw config.json`
+pw=`$SCA_SERVICE_DIR/jq -r '.setup[] | .["pw"]' config.json`
 cat <<EOT >> Dockerfile
 RUN echo "docker:$pw" | chpasswd
 #### END STARDOCK
