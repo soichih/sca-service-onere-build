@@ -20,7 +20,7 @@ EOT
 ####
 
 ##### PARSE APPS REQUESTED AND ADD TO DOCKERFILE
-for appid in `jq -r '.apps[] | .["appid"]' config.json`
+for appid in `$SCA_SERVICE_DIR/jq -r '.apps[] | .["appid"]' config.json`
 do
   case $appid in
     iraf)
