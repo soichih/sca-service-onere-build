@@ -99,6 +99,16 @@ RUN chown -R docker:docker /home/docker/miniconda2
 ### END ASTROPY BUILD
 EOT
   ;;
+  montage)
+    cat << EOT >> Dockerfile
+### MONTAGE BUILD
+RUN apt-get update && apt-get install --fix-missing -y wget gcc make
+RUN wget --quiet http://montage.ipac.caltech.edu/download/Montage_v4.0.tar.gz
+RUN tar -xzf Montage_v4.0.tar.gz -C /home/docker/
+RUN cd /home/docker/montage && make
+RUN echo -e "\nexport PATH=\$PATH:/home/docker/montage/bin\n" >> /home/docker/.bashrc
+### END MONTAGE BUILD
+EOT
   esac
 done
 
@@ -107,7 +117,11 @@ done
 ###
 
 ### STARDOCK FOOTER
+
+### NEED TO SET USER PW
+pw=`$SCA_SERVICE_DIR/jq -r .[0].pw config.json`
 cat <<EOT >> Dockerfile
+RUN echo "docker:$pw" | chpasswd
 #### END STARDOCK
 EOT
 
