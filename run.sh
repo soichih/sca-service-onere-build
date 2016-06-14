@@ -10,22 +10,9 @@ fi
 
 #### STARDOCK HEADER
 cat <<EOT > Dockerfile
-FROM ubuntu:16.04
+FROM stardock-ssh/latest
 
 MAINTAINER Michael Young <youngmd@iu.edu>
-
-RUN apt-get update && apt-get install -y openssh-server
-RUN echo "root:test" | chpasswd
-
-RUN useradd -m docker
-RUN usermod -s /bin/bash docker
-RUN usermod -aG sudo docker
-ENV HOME /home/docker
-RUN echo "docker:test" | chpasswd
-
-# start up ssh on port 22
-RUN mkdir /var/run/sshd
-EXPOSE 22
 
 #### END STARDOCK HEADER
 EOT
@@ -57,7 +44,7 @@ RUN exit
 RUN rm iraf.lnux.x86_64.tar.gz
 
 # add iraf environmental stuff to .bashrc
-RUN echo "export IRAFARCH=linux64\nexport IRAF=\iraf\iraf\\n >> /home/docker/.bashrc"
+RUN echo -e "\nexport IRAFARCH=linux64\nexport IRAF=/iraf/iraf\n" >> /home/docker/.bashrc
 
 ### END IRAF BUILD
 
@@ -104,6 +91,9 @@ RUN conda install -y numpy=1.9 scipy
 
 RUN git clone http://github.com/astropy/astropy.git
 RUN cd /root/astropy && python setup.py install
+RUN echo -e "\nexport PATH=\$PATH:~/miniconda2/bin\n" >> /home/docker/.bashrc
+RUN chown -R docker:docker /home/docker/miniconda2
+
 ### END ASTROPY BUILD
 EOT
   ;;
