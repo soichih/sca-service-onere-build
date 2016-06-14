@@ -77,6 +77,7 @@ EOT
 #based on https://github.com/gammapy/gammapy/blob/master/dev/docker/Dockerfile
 RUN apt-get update && apt-get install --fix-missing -y wget git bzip2 gcc
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # Install conda
 RUN wget --quiet http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
 RUN chmod +x miniconda.sh
