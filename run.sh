@@ -81,16 +81,17 @@ RUN apt-get update && apt-get install --fix-missing -y wget git bzip2 gcc
 RUN wget --quiet http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
 RUN chmod +x miniconda.sh
 RUN ./miniconda.sh -b
-ENV PATH /root/miniconda/bin:$PATH
+ENV PATH /home/docker/miniconda2/bin:$PATH
 RUN conda update --yes conda
 
 ENV NUMPY_VERSION 1.9
 ENV ASTROPY_VERSION development
 
-RUN conda install -y numpy=1.9 scipy
+RUN conda install -y numpy=1.9 scipy jinja2 Cython
 
-RUN git clone http://github.com/astropy/astropy.git
-RUN cd /root/astropy && python setup.py install
+RUN cd /home/docker && git clone http://github.com/astropy/astropy.git
+RUN cd /home/docker/astropy && python setup.py install
+
 RUN echo -e "\nexport PATH=\$PATH:~/miniconda2/bin\n" >> /home/docker/.bashrc
 RUN chown -R docker:docker /home/docker/miniconda2
 
