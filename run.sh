@@ -57,7 +57,7 @@ RUN apt-get update && apt-get install -y saods9
 ### END DS9 BUILD
 EOT
   ;;
-  sextractor)
+  sextract)
     cat << EOT >> Dockerfile
 ### SEXTRACTOR BUILD
 RUN apt-get update && apt-get install -y sextractor
