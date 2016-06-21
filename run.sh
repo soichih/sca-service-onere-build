@@ -20,7 +20,7 @@ EOT
 ####
 
 ##### PARSE APPS REQUESTED AND ADD TO DOCKERFILE
-for appid in `$SCA_SERVICE_DIR/jq -r '.apps[] | .["appid"]' config.json`
+for appid in `$SCA_SERVICE_DIR/jq -r  '. as $object | keys[] | select($object[.] == true)' config.json`
 do
   case $appid in
     iraf)
@@ -119,7 +119,7 @@ done
 ### STARDOCK FOOTER
 
 ### NEED TO SET USER PW
-pw=`$SCA_SERVICE_DIR/jq -r '.setup[] | .["pw"]' config.json`
+pw=`$SCA_SERVICE_DIR/jq -r '.pw' config.json`
 cat <<EOT >> Dockerfile
 RUN echo "docker:$pw" | chpasswd
 #### END STARDOCK
