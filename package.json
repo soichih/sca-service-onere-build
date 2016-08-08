@@ -1,7 +1,7 @@
 {
-  "name": "sca-stardock-build",
+  "name": "sca-service-onore",
   "version": "1.0.0",
-  "description": "build stardock images",
+  "description": "build onore images",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/youngmd/sca-stardock-build.git"
+    "url": "https://github.com/soichih/sca-service-onore.git"
   },
-  "author": "Michael Young <youngmd@iu.edu>",
-  "license": "ISC",
+  "author": "Soichi Hayashi <hayashis@iu.edu>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/youngmd/sca-stardock-build/issues"
+    "url": "https://github.com/soichih/sca-service-onore/issues"
   },
-  "homepage": "https://github.com/youngmd/sca-stardock-build#readme"
+  "homepage": "https://github.com/soichih/sca-service-onore#readme"
 }
