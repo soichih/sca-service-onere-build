@@ -10,14 +10,10 @@ fi
 
 #### STARDOCK HEADER
 cat <<EOT > Dockerfile
-FROM stardock-ssh/latest
-
-MAINTAINER Michael Young <youngmd@iu.edu>
-
-#### END STARDOCK HEADER
+#FROM stardock-ssh/latest
+FROM alpine:latest
+MAINTAINER Soichi Hayashi <hayashis@iu.edu>
 EOT
-
-####
 
 ##### PARSE APPS REQUESTED AND ADD TO DOCKERFILE
 for appid in `$SCA_SERVICE_DIR/jq -r  '. as $object | keys[] | select($object[.] == true)' config.json`
@@ -111,10 +107,6 @@ RUN echo -e "\nexport PATH=\$PATH:/home/docker/montage/bin\n" >> /home/docker/.b
 EOT
   esac
 done
-
-### INSERT CUSTOM DOCKER BUILD COMMANDS
-
-###
 
 ### STARDOCK FOOTER
 
